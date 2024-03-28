@@ -1,6 +1,10 @@
 # Trained Models
-- IEV2Mol: `MAIN/model/iev2mol_no_dot.pt`　
+- IEV2Mol: `MAIN/model/iev2mol_no_dot.pt`
+-     IEV Encoder- SMILES Decoder
+ 
 - JT-VAE: `MAIN/model/jtvae_drd2_no_dot.pt`
+-     ACTIVE で学習したただのJTVAE
+  
 - IFP-RNN: `IFP-RNN/no_dot_sdf/results/fullBits--80--0.1731--0.0010000`
 
 # Data
@@ -14,9 +18,20 @@
     - all: `MAIN/data/unique_ChEMBL_DRD2_Ki_and_IC50_no_dot.smi`
     - train: `MAIN/data/drd2_train_smiles_no_dot.smi`
     - test: `MAIN/data/drd2_test_smiles_no_dot.smi`
+      testをランダムで10個選ぶ
+      残り全部train
+      validなし
+      
 - Dataset（SMILES, IEV）: import `MAIN/data/Smiles_Vector_Dataset.py` is necessary to load these datasets
     - train: `MAIN/data/drd2_train_dataset_no_dot.pt`
     - test: `MAIN/data/drd2_test_dataset_no_dot.pt`
+ 
+      '''
+    smiles_list = ["CCO", "CCN", "CCF"]
+    IEV_list = []
+    をSmiles_Vector_Dataset(smiles_list, IEV_list)としてインスタンス化してtorch.saveでダンプしたやつがdrd2_train_dataset_no_dot.ptとか
+
+    '''
 - IFP
     - all: `IFP-RNN/no_dot_sdf/IFP_ResIFP.csv`
     - train: `IFP-RNN/no_dot_sdf/IFP_ResIFP_train.csv`
@@ -30,7 +45,7 @@
 
 ## DRD2
 - `MAIN/data/glide-grid_6CM4.zip`
-
+    maestroで作ったgrid
 
 
 
