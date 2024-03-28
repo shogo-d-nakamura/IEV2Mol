@@ -16,6 +16,8 @@
 ## DRD2 Active
 - SMILES only:
     - all: `MAIN/data/unique_ChEMBL_DRD2_Ki_and_IC50_no_dot.smi`
+       ChEMBLから化合物を選ぶプロトコルは論文に書いてある
+
     - train: `MAIN/data/drd2_train_smiles_no_dot.smi`
     - test: `MAIN/data/drd2_test_smiles_no_dot.smi`
       testをランダムで10個選ぶ
@@ -28,10 +30,11 @@
  
       '''
     smiles_list = ["CCO", "CCN", "CCF"]
-    IEV_list = []
+    IEV_list = [[x, y, z], [x, y, z], ...]
     をSmiles_Vector_Dataset(smiles_list, IEV_list)としてインスタンス化してtorch.saveでダンプしたやつがdrd2_train_dataset_no_dot.ptとか
 
     '''
+  
 - IFP
     - all: `IFP-RNN/no_dot_sdf/IFP_ResIFP.csv`
     - train: `IFP-RNN/no_dot_sdf/IFP_ResIFP_train.csv`
@@ -42,10 +45,13 @@
     - all: `MAIN/data/chembl_33_no_dot.smi`
         - This file is zipped. If you use, `unzip -j chembl_33_no_dot.smi.zip` in `MAIN/data`  
     - Randomly selected 100 SMILES * 10 set: `MAIN/evaluate_model/random_chembl/chembl33_random100_{i}.smi`
+ 
+      モデルから生成された化合物と比較する用に選ばれたChEMBLの化合物
 
 ## DRD2
 - `MAIN/data/glide-grid_6CM4.zip`
-    maestroで作ったgrid
+  
+    maestroで作ったgridファイル
 
 
 
@@ -101,6 +107,8 @@ python ../train_ddc.py --train_csv IFP_ResIFP_train_AIFPsmi.csv  --load_pkl 0  -
 ## Generate compounds and caluculate IEV, docking score, and IEV cosine similarity to seed compounds
 ### IEV2Mol
 - Results are saved in `MAIN/evaluate_model/results/test{i}/raw_csv/iev2mol.csv`
+  test{i}はtest用に選んだ10個の化合物のインデックス (0~9)
+  
 ```
 cd MAIN/evaluate_model/iev2mol
 python make_csv.py
